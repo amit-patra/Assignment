@@ -1,0 +1,22 @@
+<router-outlet></router-outlet>
+<div class="container">
+    <h2>Welcome to the Clarion login page</h2>
+    <form #f="ngForm" autocomplete="off" novalidate>
+
+        <div class="form-group">
+            <label>Email:</label><span>(Please enter email format)</span>
+            <input class="form-control" type="email" [(ngModel)]="user.email"  name="email" #email="ngModel" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" email required>
+            <div class="field-error-message" *ngIf="email?.dirty && email?.errors?.required">plese enter proper email format</div>
+        </div>
+
+        <div class="form-group">
+            <label>Password:</label><span>(Password should be one Uppercase and minimum 8 character)</span>
+            <input class="form-control" type="password" required [(ngModel)]="user.password" name="password" pattern="^(?=.*[A-Z])(.{8,15})$" #password="ngModel">
+            <div class="field-error-message" *ngIf="password?.dirty && password?.errors?.required">password is mandatory</div>
+        </div>
+        <p>
+            <button class="btn btn-default" type="submit" [disabled]="!f.valid" (click)="login()">Login</button>
+        </p>
+
+    </form>
+</div>
